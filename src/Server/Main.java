@@ -13,7 +13,7 @@ public class Main {
 	myServer.start_server();
 	for(int i=0;i<10;i++)
 	{
-	String num=myServer.GetTeamNum("½ªÄ¾»Û");
+	String num=myServer.GetTeamNum("å§œæœ¨æ…§");
 	System.out.println(num);
 	System.out.println(i);
 	}

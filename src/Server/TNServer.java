@@ -54,13 +54,19 @@ public class TNServer {
 		System.setProperty("LOG_DIR", url);
 		configFilePath = _configFilePath;
 		cc = new ConfigComponent();
-		fm = FaultManagement.getInstance();		
+		fm = FaultManagement.getInstance();	
+		try{
 		lcs = new license(Integer.parseInt(cc.readValue(configFilePath, "License")));
 		fmFilePath = cc.readValue(configFilePath, "FM");
-		System.out.println("FM:::::"+fmFilePath);
+		logger.info("read fmFilePath successfully");
 		pmFilePath = new String(cc.readValue(configFilePath, "PM"));
-		System.out.println(pmFilePath);
+		logger.info("read pmFilePath successfully");
 		server_started=false;
+		}
+		catch(Exception e)
+		{
+			logger.error("init the server wrong:config file not supported");
+		}
 	}
 
 	
