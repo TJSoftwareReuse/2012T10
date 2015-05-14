@@ -78,6 +78,10 @@ public class TNServer {
 			fm.generateWarningMessage("handle request", fmFilePath);
 			pm.AddData("handle request", 1);
 			String teamNum = cc.readValue(configFilePath, name);
+			if(teamNum==null)
+			{
+			 logger.warn("no name existed");
+			}
 			System.out.println(teamNum);
 			pm.AddData("finished requested", 1);
 			logger.info("finished request");
