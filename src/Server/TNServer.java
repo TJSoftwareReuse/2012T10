@@ -38,14 +38,14 @@ public class TNServer {
 		try {
 			lcs = new license(Integer.parseInt(cc.readValue(configFilePath,
 					"License")));
-			fmFilePath = cc.readValue(configFilePath, "FM");
+			fmFilePath = cc.readValue(configFilePath, "FMFilePath");
 			logger.info("read fmFilePath successfully");
-			pmFilePath = new String(cc.readValue(configFilePath, "PM"));
+			pmFilePath = new String(cc.readValue(configFilePath, "PMFilePath"));
 			logger.info("read pmFilePath successfully");
 			server_started = false;
 			pm = new PerformanceManager(pmFilePath);
 		} catch (Exception e) {
-			logger.error("init the server wrong:config file not supported or not exists");
+			logger.error("init the server wrong:config file wrong");
 		}
 	}
 
@@ -61,16 +61,15 @@ public class TNServer {
 		this.init();
 		System.out.println("Complete the initialization...");
 
-		System.out.println("Welcome to the Server for Student name search");
+		System.out.println("Welcome to the Server for team number search");
 		System.out
-				.println("Input the student name in console followed by enter button,you will get the team number back");
+				.println("Input the student name in console followed by clicking enter button,you will get the team number back");
 		System.out
 				.println("If you want to exit,just input exit in the console instead of the student name");
 
 		String StudentName;
-
-		fm.generateWarningMessage("start the server", fmFilePath);
-		logger.info("server starting");
+		
+		logger.info("server started");
 
 		server_started = true;
 
@@ -80,36 +79,37 @@ public class TNServer {
 			if (StudentName.equals("exit")) {
 				server_started = false;
 				logger.info("server stoped");
-				fm.generateWarningMessage("server stoped", fmFilePath);
 				System.out.println("Server stoped...");
 				break;
-			}
-						
+				}
+			pm.AddData("receive message", 1);			
 			if (lcs.add_service()) {
 				
-				pm.AddData("receive request", 1);
-				fm.generateWarningMessage("handle request", fmFilePath);
-				pm.AddData("handle request", 1);
+				fm.generateWarningMessage("offer service", fmFilePath);
+				pm.AddData("offer service", 1);
 				String teamNum = cc.readValue(configFilePath, StudentName);
-				pm.AddData("finished requested", 1);
-				logger.info("finished request");
+				pm.AddData("return message", 1);
+				logger.info("finished service");
 				if(teamNum!=null)
 				{
-					System.out.println("student " + StudentName + " is in team "
+					if(StudentName.equals("License")||StudentName.equals("PMFilePath")||StudentName.equals("FMFilePath")){
+						System.out.println("not a name");
+					}
+					else{
+						System.out.println("student " + StudentName + " is in team "
 							+ teamNum);	
-					
+					}
 				}
 				else {
-					System.out.println("no name existed");
+					System.out.println("name not exist");
 				}
 				
 			} else {
-				fm.generateWarningMessage(
-						"You have reached to the maximum license number",
-						fmFilePath);
-				pm.AddData("server rejected request", 1);
-				logger.warn("You have reached to the maximum license number");
-				System.out.println("No License available");
+				fm.generateWarningMessage("denial of service", fmFilePath);
+				pm.AddData("denial of service", 1);
+				pm.AddData("return message", 1);
+				logger.warn("no License available");
+				System.out.println("no License available");
 			}
 		}
 	}
