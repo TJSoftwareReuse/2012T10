@@ -25,6 +25,7 @@ public class Server3_0 {
 	private String url = Server3_0.class.getClassLoader().getResource("")
 			.getPath();
 
+//get the instance of server
 	public static Server3_0 getinstance(String _configFilePath) {
 		if (myTnServer != null) {
 			return myTnServer;
@@ -34,10 +35,12 @@ public class Server3_0 {
 		}
 	}
 
+//get the status of server
 	public boolean server_status() {
 		return server_started;
 	}
 
+//initialize the server
 	private void init() {
 		try {
 			lcs = new license(Integer.parseInt(cc.readValue(configFilePath,
@@ -53,6 +56,7 @@ public class Server3_0 {
 		}
 	}
 
+//construct function
 	private Server3_0(String _configFilePath) {
 		configFilePath = _configFilePath;
 		System.setProperty("LOG_DIR", url);
@@ -60,6 +64,8 @@ public class Server3_0 {
 		fm = FaultManagement.getInstance();
 	}
 
+
+//start the server
 	public void Start_Server() {
 		System.out.println("Doing initialization....");
 		this.init();
@@ -78,6 +84,7 @@ public class Server3_0 {
 
 		server_started = true;
 
+//infinit while loop,break only when the user input stop
 		while (server_status()) {
 			System.out.println("Enter Command:");
 			Teamnum = new Scanner(System.in).nextLine().toString();
@@ -89,7 +96,7 @@ public class Server3_0 {
 				System.out.println("Server stoped...");
 				break;
 			}
-
+			//judge whether the service available
 			if (lcs.add_service()) {
 				Vector<String> StudentNames = new Vector<String>();
 				pm.AddData("receive request", 1);
@@ -98,8 +105,10 @@ public class Server3_0 {
 
 				Properties properties = cc.readProperties(configFilePath);
 
+				//get the key set
 				Set<Object> studentSet = properties.keySet();
 
+				// find the available keys
 				for (Object str : studentSet) {
 					String tempname = (String) str;
 					String tempnum = properties.getProperty(tempname);
