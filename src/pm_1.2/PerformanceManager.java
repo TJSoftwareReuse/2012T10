@@ -115,7 +115,7 @@ public class PerformanceManager {
 				}
 
 				try {
-					write(sdf.format(calStart));
+					write(sdf.format(calStart.getTime()));
 					performanceData.clear();
 				} catch (IOException e1) {
 					e1.printStackTrace();
