@@ -75,9 +75,7 @@ public class Server3_5 {
 		System.out.println("Complete the initialization...");
 
 		System.out.println("Welcome to the Server3_5");
-		// System.out.println("Input the team num in console followed by enter button,you will get the student name back");
-		// System.out.println("If you want to exit,just input exit in the console instead of the team num");
-
+		
 		String command;
 		if (!fmMessage.equals("start the server")) {
 			fm.generateWarningMessage("start the server", fmFilePath);
@@ -96,6 +94,7 @@ public class Server3_5 {
 			System.out.println("Enter 'exit' to exit.");
 			System.out.println("Enter Command:");
 			command = new Scanner(System.in).nextLine().toString();
+			//exit the server
 			if (command.equals("exit")) {
 				server_started = false;
 				logger.info("server stoped");
@@ -103,6 +102,7 @@ public class Server3_5 {
 				pm.stop_PM();
 				break;
 			}
+			//change the configuration
 			if (command.equals("configure")) {
 				System.out
 						.println("Enter 'fm' to modify the path of the output file.");
@@ -113,6 +113,7 @@ public class Server3_5 {
 				System.out.println("Enter 'exit' to exit.");
 				System.out.println("Enter Command:");
 				command = new Scanner(System.in).nextLine().toString();
+				//Fm configuration
 				if (command.equals("fm")) {
 					System.out.println("Enter the new path.");
 					System.out.println("Enter Command:");
@@ -122,6 +123,7 @@ public class Server3_5 {
 					System.out.println("Succeed.");
 
 				}
+				//Pm configuration
 				if (command.equals("pm")) {
 					System.out.println("Enter the new interval.");
 					System.out.println("Enter Command:");
@@ -130,6 +132,7 @@ public class Server3_5 {
 					System.out.println("Succeed.");
 
 				}
+				//Lcs configuration
 				if (command.equals("lcs")) {
 					System.out.println("Enter the new number.");
 					System.out.println("Enter Command:");
@@ -148,12 +151,14 @@ public class Server3_5 {
 				}
 
 			}
+			//Search function
 			if (command.equals("query")) {
 				System.out.println("Enter 'tn' to query the team number.");
 				System.out.println("Enter 'tm' to query all team members.");
 				System.out.println("Enter 'exit' to exit.");
 				System.out.println("Enter Command:");
 				command = new Scanner(System.in).nextLine().toString();
+				//Search for group number by input student name
 				if (command.equals("tn")) {
 					System.out.println("Enter the student name.");
 					System.out.println("Enter Command:");
@@ -200,6 +205,7 @@ public class Server3_5 {
 
 					}
 				}
+				//Search for student name by input team number
 				if (command.equals("tm")) {
 					System.out.println("Enter the team number.");
 					System.out.println("Enter Command:");
