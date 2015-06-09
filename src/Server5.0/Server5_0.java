@@ -1,4 +1,4 @@
-package Server;
+uan package Server;
 
 import java.awt.List;
 import java.awt.color.CMMException;
@@ -14,7 +14,7 @@ import src.com.team8.License.License;
 import PM.PerformanceManager;
 import edu.tongji.FaultManagement;
 
-public class Server3_5 {
+public class Server5_0 {
 	public static final Logger logger = Logger.getLogger("stdout");
 	private String configFilePath, fmFilePath, pmFilePath;
 	private ConfigComponent cc;
@@ -22,17 +22,17 @@ public class Server3_5 {
 	private PerformanceManager pm;
 	private License lcs;
 	private String fmMessage;
-	private static Server3_5 myTnServer;
+	private static Server5_0 myTnServer;
 	private Boolean server_started;
-	private String url = Server3_5.class.getClassLoader().getResource("")
+	private String url = Server5_0.class.getClassLoader().getResource("")
 			.getPath();
 
 	// get the instance of server
-	public static Server3_5 getinstance(String _configFilePath) {
+	public static Server5_0 getinstance(String _configFilePath) {
 		if (myTnServer != null) {
 			return myTnServer;
 		} else {
-			myTnServer = new Server3_5(_configFilePath);
+			myTnServer = new Server5_0(_configFilePath);
 			return myTnServer;
 		}
 	}
@@ -60,7 +60,7 @@ public class Server3_5 {
 	}
 
 	// construct function
-	private Server3_5(String _configFilePath) {
+	private Server5_0(String _configFilePath) {
 		configFilePath = _configFilePath;
 		System.setProperty("LOG_DIR", url);
 		cc = new ConfigComponent();
@@ -74,7 +74,7 @@ public class Server3_5 {
 		this.init();
 		System.out.println("Complete the initialization...");
 
-		System.out.println("Welcome to the Server3_5");
+		System.out.println("Welcome to the Server5_0");
 		// System.out.println("Input the team num in console followed by enter button,you will get the student name back");
 		// System.out.println("If you want to exit,just input exit in the console instead of the team num");
 
